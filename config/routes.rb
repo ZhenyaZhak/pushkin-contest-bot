@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  #get 'quiz/quiz'
+  get 'quiz/quiz'
 
   root 'quiz#index'
   resources :quiz, only: [:index]
