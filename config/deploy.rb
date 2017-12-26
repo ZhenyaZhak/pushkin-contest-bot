@@ -3,6 +3,7 @@ lock "3.7.2"
 
 set :application, "PushkinContestBot"
 set :repo_url, "git@github.com:ZhenyaZhak/pushkin-contest-bot.git"
+set :user, 'deployer1'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
