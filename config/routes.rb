@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'test/test'
+
   get 'quiz/quiz'
 
   root 'quiz#index'
