@@ -43,10 +43,9 @@ class QuizController < ApplicationController
 				#end
 			end
   	end
-  	
-  	file = File.open('in_data.json', 'w') do |f|
-		  f.write(check.to_json)
-		end
+
+  	file = File.open('in_data.json', 'w')
+		file = file.write(check.to_json)
   	uri = URI('http://pushkin.rubyroidlabs.com/quiz')
 
   	parameters = {
