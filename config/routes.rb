@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
   get 'test/test'
-
-  get 'quiz/quiz'
-
   root 'quiz#quiz'
-  resources :quiz, only: [:index]
+  #resources :quiz, only: [:index]
 
   post 'quiz', to: 'quiz#quiz'
 

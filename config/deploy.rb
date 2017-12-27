@@ -9,7 +9,7 @@ set :repo_url, "git@github.com:ZhenyaZhak/pushkin-contest-bot.git"
 
 set :deploy_to, '/var/www/PushkinContestBot'
 
-set :linked_files, %w{config/database.yml config/secrets.yml}
+set :linked_files, %w{config/database.yml}
 
 set :linked_dirs, %w{log tmp/pids public/assets tmp/cache tmp/sockets vendor/bundle public/system}
 
