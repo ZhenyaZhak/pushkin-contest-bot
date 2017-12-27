@@ -8,8 +8,8 @@ class QuizController < ApplicationController
 	end
 
   def task
-  	#s_file = File.read('pushkin.json')
-		#str = JSON.parse(s_file)
+  	s_file = File.read('pushkin.json')
+		str = JSON.parse(s_file)
 		str = ""
 		answer = ""
 		question = params["question"]
