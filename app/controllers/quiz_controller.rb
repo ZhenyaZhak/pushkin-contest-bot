@@ -8,7 +8,7 @@ class QuizController < ApplicationController
 	end
 
   def task
-  	@per = "123"
+  	@per = "Lox"
 		file = File.open('in_data.json', 'w') do |f|
 		  f.write(@per.to_json)
 		end
