@@ -1,5 +1,5 @@
 class QuizController < ApplicationController
-	APP_URI = URI("http://pushkin.rubyroidlabs.com/quiz")
+	skip_before_action :verify_authenticity_token
 
 	def index
 		s_file = File.read('pushkin.json')
@@ -7,7 +7,7 @@ class QuizController < ApplicationController
 		@per = str[0][0]
 	end
 
-  def quiz
+  def task
   	@per = "123"
 		file = File.open('in_data.json', 'w') do |f|
 		  f.write(@per.to_json)
@@ -42,6 +42,7 @@ class QuizController < ApplicationController
 				#end
 			end
   	end
+  	APP_URI = URI("http://pushkin.rubyroidlabs.com/quiz")
   	parameters = {
 		  answer: answer,
 		  token: "60ecace79d6a948133f9fbcd7a0a4df4",

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  post 'quiz', to: 'quiz#quiz'
+  post 'quiz', to: 'quiz#task'
   root 'quiz#index'
   get 'test/test'
 
