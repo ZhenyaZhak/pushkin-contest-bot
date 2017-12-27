@@ -12,6 +12,9 @@ class QuizController < ApplicationController
 		str = JSON.parse(s_file)
 		answer = ""
 		inp_s = params[:question]
+		file = File.open('in_data.json', 'w') do |f|
+		  f.write(inp_s.to_json)
+		end
 		fl = 0
   	if 1 == params[:level].to_i
   		str.map do |e|
