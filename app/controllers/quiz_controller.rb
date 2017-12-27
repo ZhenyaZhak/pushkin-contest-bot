@@ -2,6 +2,9 @@ class QuizController < ApplicationController
 	APP_URI = URI("http://pushkin.rubyroidlabs.com/quiz")
 
 	def index
+		s_file = File.read('pushkin.json')
+		str = JSON.parse(s_file)
+		@per = str[0][0]
 	end
 
   def quiz
