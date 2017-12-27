@@ -11,6 +11,7 @@ class QuizController < ApplicationController
   	s_file = File.read('pushkin.json')
 		str = JSON.parse(s_file)
 		answer = nil
+		check = "lox"
 		question = params["question"]
 		level = params["level"].to_i
 		id = params["id"]
@@ -26,6 +27,7 @@ class QuizController < ApplicationController
   			tmp_str = e[1].gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
   			if tmp_str.include?(question)
   				answer = e[0]
+  				check = e[0]
   				break
   			end
 				#tmp_str = e[1].split("\n")
@@ -48,10 +50,10 @@ class QuizController < ApplicationController
 		  token: "60ecace79d6a948133f9fbcd7a0a4df4",
 		  task_id: params["id"]
 		}
-		Net::HTTP.post_form(uri, parameters)
+		s_per = Net::HTTP.post_form(uri, parameters)
 
   	file = File.open('in_data.json', 'w') do |f|
-		  f.write(answer.to_json)
+		  f.write(check.to_json)
 		end
   end
 end
