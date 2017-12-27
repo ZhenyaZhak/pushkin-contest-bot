@@ -19,9 +19,6 @@ class QuizController < ApplicationController
 		#tmp_mas << question
 		#tmp_mas << level
 		#tmp_mas << id
-		file = File.open('in_data.json', 'w') do |f|
-		  f.write(params.to_json)
-		end
 		question = question.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
 		question = question.strip
 		#fl = 0
@@ -45,6 +42,9 @@ class QuizController < ApplicationController
 				#end
 			end
   	end
+  	file = File.open('in_data.json', 'w') do |f|
+		  f.write(answer.to_json)
+		end
   	uri = URI("http://pushkin.rubyroidlabs.com/quiz")
   	parameters = {
 		  answer: answer,
