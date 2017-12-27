@@ -15,12 +15,12 @@ class QuizController < ApplicationController
 		question = params["question"]
 		level = params["level"].to_i
 		id = params["id"]
-		tmp_mas = []
-		tmp_mas << question
-		tmp_mas << level
-		tmp_mas << id
+		#tmp_mas = []
+		#tmp_mas << question
+		#tmp_mas << level
+		#tmp_mas << id
 		file = File.open('in_data.json', 'w') do |f|
-		  f.write(tmp_mas.to_json)
+		  f.write(params.to_json)
 		end
 		question = question.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
 		question = question.strip
