@@ -8,12 +8,13 @@ class QuizController < ApplicationController
 	end
 
   def quiz
-  	s_file = File.read('pushkin.json')
-		str = JSON.parse(s_file)
-		@per = "123"
+  	@per = "123"
 		file = File.open('in_data.json', 'w') do |f|
 		  f.write(@per.to_json)
 		end
+  	#s_file = File.read('pushkin.json')
+		#str = JSON.parse(s_file)
+		str = ""
 		answer = ""
 		question = params["question"]
 		level = params["level"].to_i
