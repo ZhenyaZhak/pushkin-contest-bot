@@ -42,12 +42,12 @@ class QuizController < ApplicationController
 				#end
 			end
   	end
-  	APP_URI = URI("http://pushkin.rubyroidlabs.com/quiz")
+  	uri = URI("http://pushkin.rubyroidlabs.com/quiz")
   	parameters = {
 		  answer: answer,
 		  token: "60ecace79d6a948133f9fbcd7a0a4df4",
 		  task_id: id
 		}
-		Net::HTTP.post_form(APP_URI, parameters)
+		Net::HTTP.post_form(uri, parameters)
   end
 end
