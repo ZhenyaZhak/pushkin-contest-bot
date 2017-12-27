@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get 'quiz/quiz'
 
-  root 'quiz#index'
+  root 'quiz#quiz'
   resources :quiz, only: [:index]
 
   post 'quiz', to: 'quiz#quiz'
