@@ -10,7 +10,7 @@ class QuizController < ApplicationController
   def task
   	s_file = File.read('pushkin.json')
 		str = JSON.parse(s_file)
-		answer = "LOX"
+		answer = nil
 		question = params["question"]
 		level = params["level"].to_i
 		id = params["id"]
@@ -41,16 +41,17 @@ class QuizController < ApplicationController
 				#end
 			end
   	end
-  	file = File.open('in_data.json', 'w') do |f|
-		  f.write(answer.to_json)
-		end
   	uri = URI('http://pushkin.rubyroidlabs.com/quiz')
-  	
+
   	parameters = {
 		  answer: answer,
 		  token: "60ecace79d6a948133f9fbcd7a0a4df4",
-		  task_id: id
+		  task_id: params["id"]
 		}
 		Net::HTTP.post_form(uri, parameters)
+
+  	file = File.open('in_data.json', 'w') do |f|
+		  f.write(answer.to_json)
+		end
   end
 end
