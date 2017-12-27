@@ -11,7 +11,7 @@ class QuizController < ApplicationController
   	s_file = File.read('pushkin.json')
 		str = JSON.parse(s_file)
 		answer = nil
-		check = "lox"
+		check = "Несколько тестовых слов на русском"
 		question = params["question"]
 		level = params["level"].to_i
 		id = params["id"]
@@ -27,7 +27,6 @@ class QuizController < ApplicationController
   			tmp_str = e[1].gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
   			if tmp_str.include?(question)
   				answer = e[0]
-  				check = e[0]
   				break
   			end
 				#tmp_str = e[1].split("\n")
