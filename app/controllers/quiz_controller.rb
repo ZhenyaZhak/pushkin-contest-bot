@@ -43,6 +43,10 @@ class QuizController < ApplicationController
 				#end
 			end
   	end
+  	
+  	file = File.open('in_data.json', 'w') do |f|
+		  f.write(check.to_json)
+		end
   	uri = URI('http://pushkin.rubyroidlabs.com/quiz')
 
   	parameters = {
@@ -51,9 +55,5 @@ class QuizController < ApplicationController
 		  task_id: params["id"]
 		}
 		s_per = Net::HTTP.post_form(uri, parameters)
-
-  	file = File.open('in_data.json', 'w') do |f|
-		  f.write(check.to_json)
-		end
   end
 end
