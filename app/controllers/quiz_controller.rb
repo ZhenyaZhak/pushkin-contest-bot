@@ -10,18 +10,13 @@ class QuizController < ApplicationController
   def task
     s_file = File.read('pushkin.json')
     str = JSON.parse(s_file)
-    answer = nil
+    answer = ""
     check = "Несколько тестовых слов на русском"
     question = params["question"]
     level = params["level"].to_i
     id = params["id"]
-    #tmp_mas = []
-    #tmp_mas << question
-    #tmp_mas << level
-    #tmp_mas << id
     question = question.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
     question = question.strip
-    #fl = 0
     if level == 1
       str.map do |e|
         tmp_str = e[1].gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
@@ -29,35 +24,21 @@ class QuizController < ApplicationController
           answer = e[0].to_s
           break
         end
-        #tmp_str = e[1].split("\n")
-        #tmp_str.map do |el|
-        # if el == inp_s
-        #   answer = e[0]
-        #   fl = 1
-        #   break
-        # end
-        #end
-        #if fl == 1
-        # break
-        #end+
       end
     end
-    #file = File.open('in_data.json', 'w')
-    #file = file.write(check.to_json)
     file = File.open('in_data.json', 'w') do |f|
       f.write(answer.to_json)
     end
     if answer
-      uri_app = URI("http://pushkin.rubyroidlabs.com/quiz")
-  
+      uri_app = URI('http://pushkin.rubyroidlabs.com/quiz')
+
       parameters = {
         answer: answer,
-        token: "60ecace79d6a948133f9fbcd7a0a4df4",
+        token: '60ecace79d6a948133f9fbcd7a0a4df4',
         task_id: id
       }
       res = Net::HTTP.post_form(uri_app, parameters)
-      #render json: 'good'
-      #puts res.body
+      puts res.body
     end
   end
 end
