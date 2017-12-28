@@ -12,6 +12,7 @@ gem 'rails', '~> 5.1.4'
 gem 'json', '~> 2.1'
 # gfds
 #gem 'uri'
+gem 'unicode'
 # gdgdfgdfgfdg
 gem 'net'
 # hhhhhhhhhh

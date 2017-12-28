@@ -26,7 +26,7 @@ class QuizController < ApplicationController
       str.map do |e|
         tmp_str = e[1].gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
         if tmp_str.include?(question)
-          answer = e[0]
+          answer = e[0].to_s
           break
         end
         #tmp_str = e[1].split("\n")
@@ -42,12 +42,12 @@ class QuizController < ApplicationController
         #end+
       end
     end
-
+    f = File.open('in_data.json', 'w')
     #file = File.open('in_data.json', 'w')
     #file = file.write(check.to_json)
-    file = File.open('in_data.json', 'w') do |f|
-      f.write(answer.to_json)
-    end
+    #file = File.open('in_data.json', 'w') do |f|
+    f.write(answer.to_json)
+    #end
     if answer
       uri_app = URI("http://pushkin.rubyroidlabs.com/quiz")
   
@@ -57,19 +57,14 @@ class QuizController < ApplicationController
         task_id: id
       }
       check = "После"
-      file = File.open('in_data.json', 'w') do |f|
-        f.write(parameters.to_json)
+      f.write(parameters.to_json)
       end
       res = Net::HTTP.post_form(uri_app, parameters)
       #render json: 'good'
       #puts res.body
       check = "LOX"
-      file = File.open('in_data.json', 'w') do |f|
-        f.write(check.to_json)
-      end
-    end
-    file = File.open('in_data.json', 'w') do |f|
       f.write(check.to_json)
     end
+    f.write(check.to_json)
   end
 end
