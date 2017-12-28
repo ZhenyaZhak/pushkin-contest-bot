@@ -39,24 +39,27 @@ class QuizController < ApplicationController
 				#end
 				#if fl == 1
 				#	break
-				#end
+				#end+
 			end
   	end
 
   	#file = File.open('in_data.json', 'w')
 		#file = file.write(check.to_json)
-  	uri_app = URI("http://pushkin.rubyroidlabs.com/quiz")
-
-  	parameters = {
-      answer: answer,
-      token: "60ecace79d6a948133f9fbcd7a0a4df4",
-      task_id: id
-    }
-    file = File.open('in_data.json', 'w') do |f|
-		  f.write(uri_app.to_json)
-		end
-		check = "После"
-    Net::HTTP.post_form(uri_app, parameters)
+		if answer
+  		uri_app = URI("http://pushkin.rubyroidlabs.com/quiz")
+	
+  		parameters = {
+    	  answer: answer,
+    	  token: "60ecace79d6a948133f9fbcd7a0a4df4",
+    	  task_id: id
+    	}
+			check = "После"
+    	Net::HTTP.post_form(uri_app, parameters)
+    	check = "LOX"
+    	file = File.open('in_data.json', 'w') do |f|
+			  f.write(check.to_json)
+			end
+    end
     file = File.open('in_data.json', 'w') do |f|
 		  f.write(check.to_json)
 		end
