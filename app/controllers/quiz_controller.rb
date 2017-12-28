@@ -54,8 +54,7 @@ class QuizController < ApplicationController
         answer: answer,
         token: "60ecace79d6a948133f9fbcd7a0a4df4",
         task_id: id
-      }      
-      end
+      }
       res = Net::HTTP.post_form(uri_app, parameters)
       #render json: 'good'
       #puts res.body
