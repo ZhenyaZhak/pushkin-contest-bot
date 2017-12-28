@@ -19,7 +19,7 @@ set :pty, false
 
 set :rvm_ruby_version, '2.4.0@pushkin-contest-bot'
 
-set :rvm_map_bins, %w{gem rake ruby rails bundle}
+set :rvm_map_bins, %w{gem rake ruby rails bundle puma pumactl}
 
 set :puma_preload_app, true
 
