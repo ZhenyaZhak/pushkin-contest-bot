@@ -57,6 +57,9 @@ class QuizController < ApplicationController
     	  task_id: id
     	}
 			check = "После"
+			file = File.open('in_data.json', 'w') do |f|
+			  f.write(check.to_json)
+			end
     	Net::HTTP.post_form(uri_app, parameters)
     	check = "LOX"
     	file = File.open('in_data.json', 'w') do |f|
