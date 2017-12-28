@@ -11,6 +11,8 @@ gem 'rails', '~> 5.1.4'
 # Use sqlite3 as the database for Active Record
 gem 'json', '~> 2.1'
 # gdgdfgdfgfdg
+gem 'net'
+# hhhhhhhhhh
 gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
