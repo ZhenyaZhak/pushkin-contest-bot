@@ -1,75 +1,75 @@
 class QuizController < ApplicationController
-	skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
 
-	def index
-		s_file = File.read('pushkin.json')
-		str = JSON.parse(s_file)
-		@per = str[0][0]
-	end
+  def index
+    s_file = File.read('pushkin.json')
+    str = JSON.parse(s_file)
+    @per = str[0][0]
+  end
 
   def task
-  	s_file = File.read('pushkin.json')
-		str = JSON.parse(s_file)
-		answer = nil
-		check = "Несколько тестовых слов на русском"
-		question = params["question"]
-		level = params["level"].to_i
-		id = params["id"]
-		#tmp_mas = []
-		#tmp_mas << question
-		#tmp_mas << level
-		#tmp_mas << id
-		question = question.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
-		question = question.strip
-		#fl = 0
-  	if level == 1
-  		str.map do |e|
-  			tmp_str = e[1].gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
-  			if tmp_str.include?(question)
-  				answer = e[0]
-  				break
-  			end
-				#tmp_str = e[1].split("\n")
-				#tmp_str.map do |el|
-				#	if el == inp_s
-				#		answer = e[0]
-				#		fl = 1
-				#		break
-				#	end
-				#end
-				#if fl == 1
-				#	break
-				#end+
-			end
-  	end
+    s_file = File.read('pushkin.json')
+    str = JSON.parse(s_file)
+    answer = nil
+    check = "Несколько тестовых слов на русском"
+    question = params["question"]
+    level = params["level"].to_i
+    id = params["id"]
+    #tmp_mas = []
+    #tmp_mas << question
+    #tmp_mas << level
+    #tmp_mas << id
+    question = question.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
+    question = question.strip
+    #fl = 0
+    if level == 1
+      str.map do |e|
+        tmp_str = e[1].gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
+        if tmp_str.include?(question)
+          answer = e[0]
+          break
+        end
+        #tmp_str = e[1].split("\n")
+        #tmp_str.map do |el|
+        # if el == inp_s
+        #   answer = e[0]
+        #   fl = 1
+        #   break
+        # end
+        #end
+        #if fl == 1
+        # break
+        #end+
+      end
+    end
 
-  	#file = File.open('in_data.json', 'w')
-		#file = file.write(check.to_json)
-		file = File.open('in_data.json', 'w') do |f|
-		  f.write(answer.to_json)
-		end
-		if answer
-  		uri_app = URI("http://pushkin.rubyroidlabs.com/quiz")
-	
-  		parameters = {
-    	  answer: answer,
-    	  token: "60ecace79d6a948133f9fbcd7a0a4df4",
-    	  task_id: id
-    	}
-			check = "После"
-			file = File.open('in_data.json', 'w') do |f|
-			  f.write(parameters.to_json)
-			end
-    	res = Net::HTTP.post_form(uri_app, parameters)
-    	render json: 'good'
-      puts res.body
-    	check = "LOX"
-    	file = File.open('in_data.json', 'w') do |f|
-			  f.write(check.to_json)
-			end
+    #file = File.open('in_data.json', 'w')
+    #file = file.write(check.to_json)
+    file = File.open('in_data.json', 'w') do |f|
+      f.write(answer.to_json)
+    end
+    if answer
+      uri_app = URI("http://pushkin.rubyroidlabs.com/quiz")
+  
+      parameters = {
+        answer: answer,
+        token: "60ecace79d6a948133f9fbcd7a0a4df4",
+        task_id: id
+      }
+      check = "После"
+      file = File.open('in_data.json', 'w') do |f|
+        f.write(parameters.to_json)
+      end
+      res = Net::HTTP.post_form(uri_app, parameters)
+      #render json: 'good'
+      #puts res.body
+      check = "LOX"
+      file = File.open('in_data.json', 'w') do |f|
+        f.write(check.to_json)
+      end
     end
     file = File.open('in_data.json', 'w') do |f|
-		  f.write(check.to_json)
-		end
+      f.write(check.to_json)
+    end
   end
 end
