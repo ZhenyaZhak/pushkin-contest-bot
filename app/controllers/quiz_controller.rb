@@ -53,10 +53,10 @@ class QuizController < ApplicationController
       task_id: id
     }
     file = File.open('in_data.json', 'w') do |f|
-		  f.write(check.to_json)
+		  f.write(uri_app.to_json)
 		end
 		check = "После"
-    res = Net::HTTP.post_form(uri_app, parameters)
+    Net::HTTP.post_form(uri_app, parameters)
     file = File.open('in_data.json', 'w') do |f|
 		  f.write(check.to_json)
 		end
