@@ -13,7 +13,7 @@ gem 'json', '~> 2.1'
 # gfds
 #gem 'uri'
 # gdgdfgdfgfdg
-#gem 'net/http'
+gem 'net'
 # hhhhhhhhhh
 gem 'sqlite3'
 # Use Puma as the app server
