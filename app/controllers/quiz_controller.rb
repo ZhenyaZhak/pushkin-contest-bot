@@ -2,9 +2,7 @@ class QuizController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    s_file = File.read('pushkin.json')
-    str = JSON.parse(s_file)
-    @per = str[0][0]
+    @per = 1
   end
 
   def task
@@ -71,12 +69,6 @@ class QuizController < ApplicationController
           end
         end
         index_a = index_mas[0]
-        #index_a = 0
-        #tmp_tmp_inp.size.times do |i|
-        #  if tmp_tmp_inp[i].include?('WORD')
-        #    index_a = i
-        #  end
-        #end
         fl = 0
         str.map do |e|
           tmp_str = e[1].split("\n")
@@ -98,38 +90,44 @@ class QuizController < ApplicationController
               (index_str..(index_str + level - 2)).each do |i|
                 answer << tmp_str[i].split(' ')[index_mas[i - index_str]]
               end
-              #answer << tmp_tmp_str[index_a]
-              #index_str += 1
-              #(index_str..(index_str + level - 2)).each do |i|
-              #  tmp_tmp_str = tmp_str[i].split(' ')
-              #  tmp_tmp_inp = tmp_inp_mas[i - index_str].split(' ')
-              #  tmp_tmp_str.size.times do |j|
-              #    if tmp_tmp_str[j] != tmp_tmp_inp[j]
-              #      answer << tmp_tmp_str[j]
-              #      break
-              #    end
-              #  end
-              #end
               answer = answer.join(",")
               break
             end
             index_str += 1
           end
           if fl == 1
-            #answer = []
-            #(index_str..(index_str + level - 2)).each do |i|
-            #  tmp_tmp_str = tmp_str[i]
-            #  tmp_tmp_str = tmp_tmp_str.split(' ')
-            #  tmp_tmp_inp = tmp_inp_mas[i - index_str]
-            #  tmp_tmp_inp = tmp_tmp_inp.split(' ')
-            #  tmp_tmp_str.size.times do |j|
-            #    if tmp_tmp_str[j] != tmp_tmp_inp[j]
-            #      answer << tmp_tmp_str[j]
-            #      break
-            #    end
-            #  end
-            #end
-            #answer = answer.join(",")
+            break
+          end
+        end
+      when 5
+        tmp_tmp_inp = question.split(' ')
+        str.map do |e|
+          tmp_str = e[1].split("\n")
+          tmp_str.map do |el|
+            tmp_tmp_str = el.split(' ')
+            if tmp_tmp_str.size != tmp_tmp_inp.size
+              next
+            end
+            kol = 0
+            tmp_tmp_str.size.times do |i|
+              if tmp_tmp_str[i] != tmp_tmp_inp[i]
+                kol += 1
+              end
+              if kol == 2
+                break
+              end
+            end
+            if kol == 1
+              tmp_tmp_str.size.times do |i|
+                if tmp_tmp_str[i] != tmp_tmp_inp[i]
+                  slovo = "#{tmp_tmp_str[i]},#{tmp_tmp_inp[i]}"
+                  break
+                end
+              end
+              break
+            end
+          end
+          if kol == 1
             break
           end
         end
