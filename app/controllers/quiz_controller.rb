@@ -28,22 +28,24 @@ class QuizController < ApplicationController
         end
       when 2
         tmp_tmp_inp = question.split(' ')
-        str.map do |e|
-          tmp_str = e[1].split("\n")
-          tmp_str.map do |el|
-            tmp_tmp_str = el.split(' ')
+        index_a = 0
+        tmp_tmp_inp.size.times do |k|
+          if tmp_tmp_inp[k].include?('WORD')
+            index_a = k
+          end
+        end
+        str.size.times do |i|
+          tmp_str = str[i][1].split("\n")
+          tmp_str.size.times do |j|
+            tmp_tmp_str = tmp_str[j].split(' ')
             if tmp_tmp_str.size != tmp_tmp_inp.size
               next
             end
             fl = 1
-            index_a = 0
-            tmp_tmp_str.size.times do |i|
-              if tmp_tmp_str[i] != tmp_tmp_inp[i] && !tmp_tmp_inp[i].include?('WORD')
+            tmp_tmp_str.size.times do |k|
+              if tmp_tmp_str[k] != tmp_tmp_inp[k] && !tmp_tmp_inp[k].include?('WORD')
                 fl = 0
                 break
-              end
-              if tmp_tmp_inp[i].include?('WORD')
-                index_a = i
               end
             end
             if fl == 1
