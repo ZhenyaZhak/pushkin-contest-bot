@@ -18,7 +18,7 @@ class QuizController < ApplicationController
     question = question.strip
     case level
       when 1
-        s_file = File.read('pushkin_clear.json')
+        s_file = File.read('pushkin_split.json')
         str = JSON.parse(s_file)
         str.map do |e|
           tmp_str = e[1]#.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
