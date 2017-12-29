@@ -15,9 +15,6 @@ class QuizController < ApplicationController
     question = params["question"]
     level = params["level"].to_i
     id = params["id"]
-    file = File.open('in_data.json', 'w') do |f|
-        f.write(params)
-      end
     question = question.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
     question = question.strip
     if level == 1
@@ -28,6 +25,9 @@ class QuizController < ApplicationController
           break
         end
       end
+    end
+    file = File.open('in_data.json', 'w') do |f|
+      f.write(answer.to_json)
     end
     if answer
       check = "in answer"
@@ -41,6 +41,9 @@ class QuizController < ApplicationController
       res = Net::HTTP.post_form(uri_app, parameters)
       render json: 'ok'
       puts res.body
+    end
+    file = File.open('in_data.json', 'w') do |f|
+      f.write(parameters)
     end
     #file = File.open('in_data.json', 'w') do |f|
     #  f.write(check.to_json)
