@@ -11,7 +11,6 @@ class QuizController < ApplicationController
     s_file = File.read('pushkin.json')
     str = JSON.parse(s_file)
     answer = ""
-    check = "some word"
     question = params["question"]
     level = params["level"].to_i
     id = params["id"]
@@ -21,16 +20,12 @@ class QuizController < ApplicationController
       str.map do |e|
         tmp_str = e[1].gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
         if tmp_str.include?(question)
-          answer = e[0].to_s
+          answer = e[0]
           break
         end
       end
     end
-    file = File.open('in_data.json', 'w') do |f|
-      f.write(answer.to_json)
-    end
     if answer
-      check = "in answer"
       uri_app = URI('http://pushkin.rubyroidlabs.com/quiz')
 
       parameters = {
@@ -45,8 +40,5 @@ class QuizController < ApplicationController
     file = File.open('in_data.json', 'w') do |f|
       f.write(parameters)
     end
-    #file = File.open('in_data.json', 'w') do |f|
-    #  f.write(check.to_json)
-    #end
   end
 end
