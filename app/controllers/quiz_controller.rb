@@ -30,7 +30,8 @@ class QuizController < ApplicationController
         tmp_tmp_str = Array.new
         fl = 0
         str.map do |e|
-          tmp_str = e[1].split("\n")
+          tmp_str = e[1].gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
+          tmp_str = tmp_str.split("\n")
           tmp_str.map do |el|
             tmp_tmp_str = el.split(' ')
             if tmp_tmp_str.size != tmp_tmp_inp.size
@@ -38,7 +39,7 @@ class QuizController < ApplicationController
             end
             fl = 1
             tmp_tmp_str.size.times do |i|
-              if tmp_tmp_str[i] != tmp_tmp_inp[i] && !tmp_tmp_inp[i].include?('%')
+              if tmp_tmp_str[i] != tmp_tmp_inp[i] && !tmp_tmp_inp[i].include?('WORD')
                 fl = 0
                 break
               end
