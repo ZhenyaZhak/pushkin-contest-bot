@@ -20,15 +20,14 @@ class QuizController < ApplicationController
     question = question.strip
     case level
       when 1
-        str.map do |e|
-          if e[1].include?(question)
-            answer = e[0]
+        str.size.times do |i|
+          if str[i][1].include?(question)
+            answer = str[i][0]
             break
           end
         end
       when 2
         tmp_tmp_inp = question.split(' ')
-        fl = 0
         str.map do |e|
           tmp_str = e[1].split("\n")
           tmp_str.map do |el|
@@ -53,12 +52,6 @@ class QuizController < ApplicationController
             end
           end
           if fl == 1
-            #tmp_tmp_str.size.times do |i|
-            #  if tmp_tmp_str[i] != tmp_tmp_inp[i]
-            #    answer = tmp_tmp_str[i]
-            #    break
-            #  end
-            #end
             break
           end
         end
@@ -68,8 +61,7 @@ class QuizController < ApplicationController
         tmp_tmp_str = Array.new
         fl = 0
         str.map do |e|
-          tmp_str = e[1].gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
-          tmp_str = tmp_str.split("\n")
+          tmp_str = e[1].split("\n")
           index_str = 0
           tmp_str.map do |el|
             tmp_tmp_str = el.split(' ')
