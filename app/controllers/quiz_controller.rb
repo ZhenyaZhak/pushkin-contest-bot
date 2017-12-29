@@ -25,7 +25,7 @@ class QuizController < ApplicationController
           #  answer = e[0]
           #  break
           #end
-          #tmp_str = e[1]#.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
+          tmp_str = e[1]#.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
           #if tmp_str.include?(question)
           #  answer = e[0]
           #  break
