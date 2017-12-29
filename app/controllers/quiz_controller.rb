@@ -16,14 +16,15 @@ class QuizController < ApplicationController
     id = params["id"]
     question = question.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
     question = question.strip
-    if level == 1
-      str.map do |e|
-        tmp_str = e[1].gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
-        if tmp_str.include?(question)
-          answer = e[0]
-          break
+    case level
+      when 1
+        str.map do |e|
+          tmp_str = e[1].gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\\\|\{\}\:\"\[\]\<\>\?\—]/,"")
+          if tmp_str.include?(question)
+            answer = e[0]
+            break
+          end
         end
-      end
     end
     if answer
       uri_app = URI('http://pushkin.rubyroidlabs.com/quiz')
@@ -33,7 +34,7 @@ class QuizController < ApplicationController
         token: '60ecace79d6a948133f9fbcd7a0a4df4',
         task_id: id
       }
-      res = Net::HTTP.post_form(uri_app, parameters)
+      Net::HTTP.post_form(uri_app, parameters)
       #render json: 'ok'
       #puts res.body
     end
