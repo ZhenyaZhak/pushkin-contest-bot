@@ -61,12 +61,22 @@ class QuizController < ApplicationController
       when 3..4
         tmp_inp_mas = question.split("\n")
         tmp_tmp_inp = tmp_inp_mas[0].split(' ')
-        index_a = 0
-        tmp_tmp_inp.size.times do |i|
-          if tmp_tmp_inp[i].include?('WORD')
-            index_a = i
+        index_mas = []
+        tmp_inp_mas.map do |e|
+          tmp_str = e.split(' ')
+          tmp_str.size.times do |i|
+            if tmp_str[i].include?('WORD')
+              index_mas << i
+            end  
           end
         end
+        index_a = index_mas[0]
+        #index_a = 0
+        #tmp_tmp_inp.size.times do |i|
+        #  if tmp_tmp_inp[i].include?('WORD')
+        #    index_a = i
+        #  end
+        #end
         fl = 0
         str.map do |e|
           tmp_str = e[1].split("\n")
@@ -85,18 +95,21 @@ class QuizController < ApplicationController
             end
             if fl == 1
               answer = []
-              answer << tmp_tmp_str[index_a]
-              index_str += 1
-              (index_str..(index_str + level - 3)).each do |i|
-                tmp_tmp_str = tmp_str[i].split(' ')
-                tmp_tmp_inp = tmp_inp_mas[i - index_str].split(' ')
-                tmp_tmp_str.size.times do |j|
-                  if tmp_tmp_str[j] != tmp_tmp_inp[j]
-                    answer << tmp_tmp_str[j]
-                    break
-                  end
-                end
+              (index_str..(index_str + level - 2)).each do |i|
+                answer << tmp_str[i].split(' ')[index_mas[i - index_str]]
               end
+              #answer << tmp_tmp_str[index_a]
+              #index_str += 1
+              #(index_str..(index_str + level - 2)).each do |i|
+              #  tmp_tmp_str = tmp_str[i].split(' ')
+              #  tmp_tmp_inp = tmp_inp_mas[i - index_str].split(' ')
+              #  tmp_tmp_str.size.times do |j|
+              #    if tmp_tmp_str[j] != tmp_tmp_inp[j]
+              #      answer << tmp_tmp_str[j]
+              #      break
+              #    end
+              #  end
+              #end
               answer = answer.join(",")
               break
             end
