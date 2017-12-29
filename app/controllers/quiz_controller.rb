@@ -28,6 +28,12 @@ class QuizController < ApplicationController
         end
       when 2
         tmp_tmp_inp = question.split(' ')
+        index_a = 0
+        tmp_tmp_inp.size.times do |i|
+          if tmp_tmp_inp[i].include?('WORD')
+            index_a = i
+          end
+        end
         fl = 0
         str.map do |e|
           tmp_str = e[1].split("\n")
@@ -37,14 +43,10 @@ class QuizController < ApplicationController
               next
             end
             fl = 1
-            index_a = 0
             tmp_tmp_str.size.times do |i|
               if tmp_tmp_str[i] != tmp_tmp_inp[i] && !tmp_tmp_inp[i].include?('WORD')
                 fl = 0
                 break
-              end
-              if tmp_tmp_inp[i].include?('WORD')
-                index_a = i
               end
             end
             if fl == 1
