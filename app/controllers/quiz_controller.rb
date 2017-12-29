@@ -10,6 +10,8 @@ class QuizController < ApplicationController
   def task
     #s_file = File.read('pushkin.json')
     #str = JSON.parse(s_file)
+    s_file = File.read('pushkin_clear.json')
+    str = JSON.parse(s_file)
     answer = ""
     question = params["question"]
     level = params["level"].to_i
@@ -18,8 +20,6 @@ class QuizController < ApplicationController
     question = question.strip
     case level
       when 1
-        s_file = File.read('pushkin_clear.json')
-        str = JSON.parse(s_file)
         str.map do |e|
           if e[1].include?(question)
             answer = e[0]
@@ -30,31 +30,35 @@ class QuizController < ApplicationController
         tmp_tmp_inp = question.split(' ')
         fl = 0
         str.map do |e|
-          tmp_str = e[1].gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
-          tmp_str = tmp_str.split("\n")
+          tmp_str = e[1].split("\n")
           tmp_str.map do |el|
             tmp_tmp_str = el.split(' ')
             if tmp_tmp_str.size != tmp_tmp_inp.size
               next
             end
             fl = 1
+            index_a = 0
             tmp_tmp_str.size.times do |i|
               if tmp_tmp_str[i] != tmp_tmp_inp[i] && !tmp_tmp_inp[i].include?('WORD')
                 fl = 0
                 break
               end
+              if tmp_tmp_inp[i].include?('WORD')
+                index_a = i
+              end
             end
             if fl == 1
+              answer = tmp_tmp_str[index_a]
               break
             end
           end
           if fl == 1
-            tmp_tmp_str.size.times do |i|
-              if tmp_tmp_str[i] != tmp_tmp_inp[i]
-                answer = tmp_tmp_str[i]
-                break
-              end
-            end
+            #tmp_tmp_str.size.times do |i|
+            #  if tmp_tmp_str[i] != tmp_tmp_inp[i]
+            #    answer = tmp_tmp_str[i]
+            #    break
+            #  end
+            #end
             break
           end
         end
