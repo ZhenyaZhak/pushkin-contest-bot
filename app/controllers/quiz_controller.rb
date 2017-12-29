@@ -28,6 +28,7 @@ class QuizController < ApplicationController
         end
       when 2
         tmp_tmp_inp = question.split(' ')
+        fl = 0
         str.map do |e|
           tmp_str = e[1].split("\n")
           tmp_str.map do |el|
