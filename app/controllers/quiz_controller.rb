@@ -58,39 +58,51 @@ class QuizController < ApplicationController
             break
           end
         end
-      #when 3
-      #  tmp_tmp_inp = question.split("\n")[0]
-      #  tmp_tmp_str = Array.new
-      #  fl = 0
-      #  str.map do |e|
-      #    tmp_str = e[1].gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
-      #    tmp_str = tmp_str.split("\n")
-      #    tmp_str.map do |el|
-      #      tmp_tmp_str = el.split(' ')
-      #      if tmp_tmp_str.size != tmp_tmp_inp.size
-      #        next
-      #      end
-      #      fl = 1
-      #      tmp_tmp_str.size.times do |i|
-      #        if tmp_tmp_str[i] != tmp_tmp_inp[i] && !tmp_tmp_inp[i].include?('WORD')
-      #          fl = 0
-      #          break
-      #        end
-      #      end
-      #      if fl == 1
-      #        break
-      #      end
-      #    end
-      #    if fl == 1
-      #      tmp_tmp_str.size.times do |i|
-      #        if tmp_tmp_str[i] != tmp_tmp_inp[i]
-      #          answer = tmp_tmp_str[i]
-      #          break
-      #        end
-      #      end
-      #      break
-      #    end
-      #  end
+      when 3
+        tmp_inp_mas = question.split("\n")
+        tmp_tmp_inp = tmp_inp_mas[0].split(' ')
+        #tmp_tmp_inp = question.split("\n")[0].split(' ')
+        tmp_tmp_str = Array.new
+        fl = 0
+        str.map do |e|
+          tmp_str = e[1].gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
+          tmp_str = tmp_str.split("\n")
+          index_str = 0
+          tmp_str.map do |el|
+            tmp_tmp_str = el.split(' ')
+            if tmp_tmp_str.size != tmp_tmp_inp.size
+              next
+            end
+            fl = 1
+            tmp_tmp_str.size.times do |i|
+              if tmp_tmp_str[i] != tmp_tmp_inp[i] && !tmp_tmp_inp[i].include?('WORD')
+                fl = 0
+                break
+              end
+            end
+            if fl == 1
+              break
+            end
+            index_str += 1
+          end
+          if fl == 1
+            answer = []
+            (index_str..(index_str + level - 2)).each do |i|
+              tmp_tmp_str = tmp_str[i]
+              tmp_tmp_str = tmp_tmp_str.split(' ')
+              tmp_tmp_inp = tmp_inp_mas[i - index_str]
+              tmp_tmp_inp = tmp_tmp_inp.split(' ')
+              tmp_tmp_str.size.times do |j|
+                if tmp_tmp_str[j] != tmp_tmp_inp[j]
+                  answer << tmp_tmp_str[j]
+                  break
+                end
+              end
+            end
+            answer = answer.join(",")
+            break
+          end
+        end
     end
     if answer
       uri_app = URI('http://pushkin.rubyroidlabs.com/quiz')
