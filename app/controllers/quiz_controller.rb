@@ -8,8 +8,8 @@ class QuizController < ApplicationController
   end
 
   def task
-    s_file = File.read('pushkin.json')
-    str = JSON.parse(s_file)
+    #s_file = File.read('pushkin.json')
+    #str = JSON.parse(s_file)
     answer = ""
     question = params["question"]
     level = params["level"].to_i
@@ -18,16 +18,26 @@ class QuizController < ApplicationController
     question = question.strip
     case level
       when 1
+        s_file = File.read('pushkin_clear.json')
+        str = JSON.parse(s_file)
         str.map do |e|
-          tmp_str = e[1].gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
-          if tmp_str.include?(question)
-            answer = e[0]
+          tmp_str = e[1]#.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
+          #if tmp_str.include?(question)
+          #  answer = e[0]
+          #  break
+          #end
+          tmp_str.map do |el|
+            if el == question
+              answer = e[0]
+              break
+            end
+          end
+          if answer != ""
             break
           end
         end
       when 2
         tmp_tmp_inp = question.split(' ')
-        tmp_tmp_str = Array.new
         fl = 0
         str.map do |e|
           tmp_str = e[1].gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
@@ -61,7 +71,6 @@ class QuizController < ApplicationController
       when 3
         tmp_inp_mas = question.split("\n")
         tmp_tmp_inp = tmp_inp_mas[0].split(' ')
-        #tmp_tmp_inp = question.split("\n")[0].split(' ')
         tmp_tmp_str = Array.new
         fl = 0
         str.map do |e|
