@@ -16,6 +16,9 @@ class QuizController < ApplicationController
     id = params["id"]
     question = question.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
     question = question.strip
+    file = File.open('in_data.json', 'w') do |f|
+      f.write(params)
+    end
     case level
       when 1
         str.size.times do |i|
@@ -172,8 +175,7 @@ class QuizController < ApplicationController
       #puts res.body
     end
     file = File.open('in_data.json', 'w') do |f|
-      f.write(params)
-      #f.write(parameters)
+      f.write(parameters)
     end
   end
 end
