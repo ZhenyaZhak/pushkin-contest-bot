@@ -150,10 +150,10 @@ class QuizController < ApplicationController
             fl = 0
             if tmp_tmp_str.include?(tmp_tmp_inp)
               fl = 1
+              answer = str1[x][1].split("\n")[y]
               break
             end
             if fl == 1
-              answer = str1[x][1].split("\n")[y]
               break
             end
             y += 1
