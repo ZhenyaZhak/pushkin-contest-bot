@@ -68,10 +68,10 @@ class QuizController < ApplicationController
           tmp_str.size.times do |i|
             if tmp_str[i].include?('WORD')
               index_mas << i
-            end  
+              break
+            end
           end
         end
-        index_a = index_mas[0]
         fl = 0
         str.map do |e|
           tmp_str = e[1].split("\n")
@@ -90,9 +90,17 @@ class QuizController < ApplicationController
             end
             if fl == 1
               answer = []
-              (index_str..(index_str + level - 2)).each do |i|
-                answer << tmp_str[i].split(' ')[index_mas[i - index_str]]
+              if level == 3
+                answer << tmp_tmp_str[index_str].split(' ')[index_mas[0]]
+                answer << tmp_tmp_str[index_str].split(' ')[index_mas[1]]
+              else
+                answer << tmp_tmp_str[index_str].split(' ')[index_mas[0]]
+                answer << tmp_tmp_str[index_str].split(' ')[index_mas[1]]
+                answer << tmp_tmp_str[index_str].split(' ')[index_mas[2]]
               end
+              #(index_str..(index_str + level - 2)).each do |i|
+              #  answer << tmp_str[i].split(' ')[index_mas[i - index_str]]
+              #end
               answer = answer.join(",")
               break
             end
