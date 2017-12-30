@@ -13,9 +13,9 @@ class QuizController < ApplicationController
     level = params["level"].to_i
     id = params["id"]
     tmp_tmp_inp = Array.new
-    file = File.open('in_data.json', 'w') do |f|
-      f.write(params)
-    end
+    #file = File.open('in_data.json', 'w') do |f|
+    #  f.write(params)
+    #end
     if level < 6
       question = question.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
     end
