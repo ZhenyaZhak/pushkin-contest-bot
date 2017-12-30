@@ -101,6 +101,7 @@ class QuizController < ApplicationController
         end
       when 5
         tmp_tmp_inp = question.split(' ')
+        kol = 0
         str.map do |e|
           tmp_str = e[1].split("\n")
           tmp_str.map do |el|
@@ -133,6 +134,7 @@ class QuizController < ApplicationController
         end
       when 6
         tmp_tmp_inp = question.split(' ')
+        kol = 0
         str.map do |e|
           tmp_str = e[1].split("\n")
           tmp_str.map do |el|
