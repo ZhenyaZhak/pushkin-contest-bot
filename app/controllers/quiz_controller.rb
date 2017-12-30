@@ -154,7 +154,7 @@ class QuizController < ApplicationController
               end
             end
             if fl == 0
-              #answer = el
+              answer = el.to_s
               break
             end
           end
@@ -172,8 +172,7 @@ class QuizController < ApplicationController
         task_id: id
       }
       Net::HTTP.post_form(uri_app, parameters)
-      #render json: 'ok'
-      #puts res.body
+      render json: 'ok'
     end
     file = File.open('in_data.json', 'w') do |f|
       f.write(params)
