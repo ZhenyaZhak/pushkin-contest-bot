@@ -163,6 +163,10 @@ class QuizController < ApplicationController
             break
           end
         end
+        file = File.open('in_data.json', 'w') do |f|
+          f.write(params)
+          f.write(tmp_tmp_inp.jo_json)
+        end
     end
     if answer
       uri_app = URI('http://pushkin.rubyroidlabs.com/quiz')
@@ -175,10 +179,10 @@ class QuizController < ApplicationController
       Net::HTTP.post_form(uri_app, parameters)
       render json: 'ok'
     end
-    file = File.open('in_data.json', 'w') do |f|
-      f.write(params)
-      f.write(parameters)
-      f.write(tmp_tmp_inp.jo_json)
-    end
+    #file = File.open('in_data.json', 'w') do |f|
+    #  f.write(params)
+    #  f.write(parameters)
+    #  f.write(tmp_tmp_inp.jo_json)
+    #end
   end
 end
