@@ -135,17 +135,16 @@ class QuizController < ApplicationController
       when 6
         s1_file = File.read('pushkin.json')
         str1 = JSON.parse(s1_file)
-        tmp_tmp_inp = question.split(//).sort.join.strip
+        tmp_tmp_inp = question.gsub!(" ", "")
         fl = 0
         x = 0
-        y = 0
         str.map do |e|
           tmp_str = e[1].split("\n")
           y = 0
+          fl = 0
           tmp_str.map do |el|
-            tmp_tmp_str = el.split(//).sort.join.strip
-            fl = 0
-            if tmp_tmp_str == tmp_tmp_inp
+            tmp_tmp_str = el.gsub!(" ", "")
+            if tmp_tmp_str.sum == tmp_tmp_inp.sum
               fl = 1
               answer = str1[x][1].split("\n")[y]
               break
