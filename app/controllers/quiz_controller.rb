@@ -173,7 +173,7 @@ class QuizController < ApplicationController
     end
     file = File.open('in_data.json', 'w') do |f|
       f.write(params)
-      f.write(parameters)
+      #f.write(parameters)
     end
   end
 end
