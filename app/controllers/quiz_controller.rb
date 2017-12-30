@@ -6,8 +6,6 @@ class QuizController < ApplicationController
   end
 
   def task
-    #s_file = File.read('pushkin.json')
-    #str = JSON.parse(s_file)
     s_file = File.read('pushkin_clear.json')
     str = JSON.parse(s_file)
     answer = ""
@@ -138,8 +136,12 @@ class QuizController < ApplicationController
           end
         end
       when 6
+        s1_file = File.read('pushkin.json')
+        str1 = JSON.parse(s1_file)
         tmp_tmp_inp = question.split(' ')
         fl = 0
+        x = 0
+        y = 0
         str.map do |e|
           tmp_str = e[1].split("\n")
           tmp_str.map do |el|
@@ -155,10 +157,12 @@ class QuizController < ApplicationController
               end
             end
             if fl == 0
-              answer = el
+              answer = str1[x][1].split("\n")[y]
               break
             end
+            y += 1
           end
+          x += 1
           if fl == 0
             break
           end
