@@ -12,10 +12,6 @@ class QuizController < ApplicationController
     question = params["question"]
     level = params["level"].to_i
     id = params["id"]
-    tmp_tmp_inp = Array.new
-    #file = File.open('in_data.json', 'w') do |f|
-    #  f.write(params)
-    #end
     if level < 6
       question = question.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
     end
@@ -161,7 +157,7 @@ class QuizController < ApplicationController
           end
         end
     end
-    if answer
+    if answer != ""
       uri_app = URI('http://pushkin.rubyroidlabs.com/quiz')
 
       parameters = {
