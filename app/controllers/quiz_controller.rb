@@ -139,12 +139,11 @@ class QuizController < ApplicationController
         end
       when 6
         tmp_tmp_inp = question.split(' ')
-        tmp_tmp_str = Array.new
         fl = 0
         str.map do |e|
           tmp_str = e[1].split("\n")
           tmp_str.map do |el|
-            tmp_tmp_str = el.split(' ')
+            tmp_tmp_str = el.strip.split(' ')
             if tmp_tmp_str.size != tmp_tmp_inp.size
               next
             end
@@ -156,7 +155,7 @@ class QuizController < ApplicationController
               end
             end
             if fl == 0
-              answer = el.to_s
+              answer = el
               break
             end
           end
