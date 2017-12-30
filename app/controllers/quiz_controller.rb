@@ -148,12 +148,9 @@ class QuizController < ApplicationController
           tmp_str.map do |el|
             tmp_tmp_str = el.split(//).sort.join.strip
             fl = 0
-            if tmp_tmp_str.include?(tmp_tmp_inp)
+            if tmp_tmp_str == tmp_tmp_inp
               fl = 1
               answer = str1[x][1].split("\n")[y]
-              break
-            end
-            if fl == 1
               break
             end
             y += 1
