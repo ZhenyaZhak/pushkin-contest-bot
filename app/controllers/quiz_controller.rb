@@ -148,7 +148,7 @@ class QuizController < ApplicationController
           tmp_str.map do |el|
             tmp_tmp_str = el.split(//).sort.join.strip
             fl = 0
-            if tmp_tmp_inp == tmp_tmp_str
+            if tmp_tmp_str.include?(tmp_tmp_inp)
               fl = 1
               break
             end
