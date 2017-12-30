@@ -139,8 +139,7 @@ class QuizController < ApplicationController
       when 6
         s1_file = File.read('pushkin.json')
         str1 = JSON.parse(s1_file)
-        tmp_tmp_inp = question.split(//).sort.join
-
+        tmp_tmp_inp = question#.split(//).sort.join
         fl = 0
         x = 0
         y = 0
