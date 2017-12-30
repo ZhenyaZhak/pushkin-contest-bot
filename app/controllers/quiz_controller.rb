@@ -12,6 +12,7 @@ class QuizController < ApplicationController
     question = params["question"]
     level = params["level"].to_i
     id = params["id"]
+    tmp_tmp_inp = Array.new
     file = File.open('in_data.json', 'w') do |f|
       f.write(params)
     end
@@ -139,6 +140,7 @@ class QuizController < ApplicationController
         s1_file = File.read('pushkin.json')
         str1 = JSON.parse(s1_file)
         tmp_tmp_inp = question.split(//).sort.join
+
         fl = 0
         x = 0
         y = 0
@@ -177,6 +179,7 @@ class QuizController < ApplicationController
     file = File.open('in_data.json', 'w') do |f|
       f.write(params)
       f.write(parameters)
+      f.write(tmp_tmp_inp.jo_json)
     end
   end
 end
