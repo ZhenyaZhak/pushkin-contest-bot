@@ -1,6 +1,11 @@
 class QuizController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  def initializers
+    s_file = File.read('pushkin_clear.json')
+    str = JSON.parse(s_file)
+  end
+
   def index
     @per = 1
   end
