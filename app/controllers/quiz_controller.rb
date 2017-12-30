@@ -17,7 +17,9 @@ class QuizController < ApplicationController
     file = File.open('in_data.json', 'w') do |f|
       f.write(params)
     end
-    question = question.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
+    if level < 6
+      question = question.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
+    end
     question = question.strip
     case level
       when 1
@@ -136,32 +138,32 @@ class QuizController < ApplicationController
           end
         end
       when 6
-        #tmp_tmp_inp = question.split(' ')
-        #tmp_tmp_str = Array.new
-        #fl = 0
-        #str.map do |e|
-        #  tmp_str = e[1].split("\n")
-        #  tmp_str.map do |el|
-        #    tmp_tmp_str = el.split(' ')
-        #    if tmp_tmp_str.size != tmp_tmp_inp.size
-        #      next
-        #    end
-        #    fl = 0
-        #    tmp_tmp_str.size.times do |i|
-        #      if tmp_tmp_str[i].sum != tmp_tmp_inp[i].sum
-        #        fl = 1
-        #        break
-        #      end
-        #    end
-        #    if fl == 0
-        #      answer = el.to_s
-        #      break
-        #    end
-        #  end
-        #  if fl == 0
-        #    break
-        #  end
-        #end
+        tmp_tmp_inp = question.split(' ')
+        tmp_tmp_str = Array.new
+        fl = 0
+        str.map do |e|
+          tmp_str = e[1].split("\n")
+          tmp_str.map do |el|
+            tmp_tmp_str = el.split(' ')
+            if tmp_tmp_str.size != tmp_tmp_inp.size
+              next
+            end
+            fl = 0
+            tmp_tmp_str.size.times do |i|
+              if tmp_tmp_str[i].sum != tmp_tmp_inp[i].sum
+                fl = 1
+                break
+              end
+            end
+            if fl == 0
+              answer = el.to_s
+              break
+            end
+          end
+          if fl == 0
+            break
+          end
+        end
     end
     if answer
       uri_app = URI('http://pushkin.rubyroidlabs.com/quiz')
