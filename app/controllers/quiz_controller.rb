@@ -124,7 +124,7 @@ class QuizController < ApplicationController
             if kol == 1
               tmp_tmp_str.size.times do |i|
                 if tmp_tmp_str[i] != tmp_tmp_inp[i]
-                  slovo = "#{tmp_tmp_str[i]},#{tmp_tmp_inp[i]}"
+                  answer = "#{tmp_tmp_str[i]},#{tmp_tmp_inp[i]}"
                   break
                 end
               end
