@@ -148,7 +148,7 @@ class QuizController < ApplicationController
               next
             end
             fl = 0
-            tmp_tmp_str.size.times do |i|
+            tmp_tmp_inp.size.times do |i|
               if tmp_tmp_str[i].sum != tmp_tmp_inp[i].sum
                 fl = 1
                 break
