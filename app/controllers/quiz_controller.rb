@@ -151,14 +151,14 @@ class QuizController < ApplicationController
               fl = 1
               break
             end
-            if fl == 0
+            if fl == 1
               answer = str1[x][1].split("\n")[y]
               break
             end
             y += 1
           end
           x += 1
-          if fl == 0
+          if fl == 1
             break
           end
         end
