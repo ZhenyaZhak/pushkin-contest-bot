@@ -141,6 +141,7 @@ class QuizController < ApplicationController
         y = 0
         str.map do |e|
           tmp_str = e[1].split("\n")
+          y = 0
           tmp_str.map do |el|
             tmp_tmp_str = el.split(//).sort.join.strip
             fl = 0
