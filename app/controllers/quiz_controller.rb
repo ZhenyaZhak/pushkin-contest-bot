@@ -137,8 +137,8 @@ class QuizController < ApplicationController
           end
         end
       when 6
-        s1_file = File.read('pushkin.json')
-        str1 = JSON.parse(s1_file)
+        #s1_file = File.read('pushkin.json')
+        #str1 = JSON.parse(s1_file)
         tmp_tmp_inp = question#.split(//).sort.join
         fl = 0
         x = 0
@@ -153,7 +153,7 @@ class QuizController < ApplicationController
               break
             end
             if fl == 1
-              answer = str1[x][1].split("\n")[y]
+              #answer = str1[x][1].split("\n")[y]
               break
             end
             y += 1
