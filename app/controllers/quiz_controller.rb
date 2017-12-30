@@ -6,8 +6,6 @@ class QuizController < ApplicationController
   end
 
   def task
-    s_file = File.read('pushkin_clear.json')
-    str = JSON.parse(s_file)
     answer = ""
     question = params["question"]
     level = params["level"].to_i
