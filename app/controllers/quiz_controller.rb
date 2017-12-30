@@ -14,11 +14,11 @@ class QuizController < ApplicationController
     question = params["question"]
     level = params["level"].to_i
     id = params["id"]
-    question = question.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
-    question = question.strip
     file = File.open('in_data.json', 'w') do |f|
       f.write(params)
     end
+    question = question.gsub!(/[\«\»\~\!\@\#\$\%\^\&\*\(\)\_\+\`\-\=\№\;\?\/\,\.\/\;\'\|\{\}\:\"\[\]\<\>\?\—]/,"")
+    question = question.strip
     case level
       when 1
         str.size.times do |i|
