@@ -147,10 +147,10 @@ class QuizController < ApplicationController
             end
             kol = 0
             tmp_tmp_str.size.times do |i|
-              if tmp_tmp_str[i].sum != tmp_tmp_inp[i].sum
-                kol = 1
-                break
-              end
+              #if tmp_tmp_str[i].sum != tmp_tmp_inp[i].sum
+              #  kol = 1
+              #  break
+              #end
             end
             if kol == 0
               answer = el
