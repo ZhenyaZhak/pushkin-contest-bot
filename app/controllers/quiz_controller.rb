@@ -166,11 +166,6 @@ class QuizController < ApplicationController
         task_id: id
       }
       Net::HTTP.post_form(uri_app, parameters)
-      render json: 'ok'
-    end
-    file = File.open('in_data.json', 'w') do |f|
-      f.write(params)
-      f.write(parameters)
     end
   end
 end
