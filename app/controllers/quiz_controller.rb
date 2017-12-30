@@ -136,9 +136,9 @@ class QuizController < ApplicationController
           end
         end
       when 6
-        tmp_tmp_inp = question.split(' ')
-        tmp_tmp_str = Array.new
-        fl = 0
+        #tmp_tmp_inp = question.split(' ')
+        #tmp_tmp_str = Array.new
+        #fl = 0
         #str.map do |e|
         #  tmp_str = e[1].split("\n")
         #  tmp_str.map do |el|
