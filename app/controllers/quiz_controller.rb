@@ -165,6 +165,7 @@ class QuizController < ApplicationController
         end
         file = File.open('in_data.json', 'w') do |f|
           f.write(params)
+          f.write(question.jo_json)
           f.write(tmp_tmp_inp.jo_json)
         end
     end
