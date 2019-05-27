@@ -1,0 +1,65 @@
+version: 2.0
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - checkout_code
+
+      - bundle_backend_dependencies:
+          requires:
+            - checkout_code
+      - deploy_to_amazon_production:
+          requires:
+            - bundle_backend_dependencies
+          filters:
+            branches:
+              only: master
+
+jobs:
+  checkout_code:
+    docker:
+      - image: circleci/ruby:2.2.10-jessie
+    working_directory: ~/app
+    steps:
+      - checkout
+      - save_cache:
+          key: app-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/app
+
+  bundle_backend_dependencies:
+    docker:
+      - image: circleci/ruby:2.2.10-jessie
+    working_directory: ~/app
+    steps:
+      - restore_cache:
+          keys:
+            - app-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          keys:
+            - app-gems-{{ checksum "Gemfile.lock" }}
+      - run: gem install bundler
+      - run: bundle install --path vendor/bundle
+      - save_cache:
+          key: app-gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+  deploy_to_amazon_production:
+    docker:
+      - image: circleci/ruby:2.2.10-jessie
+    working_directory: ~/app
+    steps:
+      - restore_cache:
+          keys:
+            - app-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          keys:
+            - app-gems-{{ checksum "Gemfile.lock" }}
+      - checkout
+      - run: gem install bundler
+      - run: bundle --path vendor/bundle
+      - run:
+          name: Deploy master branch to production server
+          command: bundle exec cap production deploy
