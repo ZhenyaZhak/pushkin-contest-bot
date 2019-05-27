@@ -19,7 +19,7 @@ workflows:
 jobs:
   checkout_code:
     docker:
-      - image: circleci/ruby:2.2.10-jessie
+      - image: circleci/ruby:2.3.5-jessie
     working_directory: ~/app
     steps:
       - checkout
@@ -30,7 +30,7 @@ jobs:
 
   bundle_backend_dependencies:
     docker:
-      - image: circleci/ruby:2.2.10-jessie
+      - image: circleci/ruby:2.3.5-jessie
     working_directory: ~/app
     steps:
       - restore_cache:
@@ -48,7 +48,7 @@ jobs:
 
   deploy_to_amazon_production:
     docker:
-      - image: circleci/ruby:2.2.10-jessie
+      - image: circleci/ruby:2.3.5-jessie
     working_directory: ~/app
     steps:
       - restore_cache:
